@@ -23,4 +23,4 @@ jobs:
         run: python --version
 
       - name: Run unit tests
-        run: python tests\test_data_preprocessing.py
+        run: python tests/test_data_preprocessing.py
