@@ -1,3 +1,38 @@
+# EthioMart: Amharic NER for Telegram E-Commerce
+
+## Project Overview
+This project focuses on developing a **Named Entity Recognition (NER) system** for Amharic text extracted from Ethiopian Telegram e-commerce channels. The goal is to identify key business entities (products, prices, locations) to populate **EthioMart's** centralized database.
+
+### Key Features
+- 📥 **Data Ingestion**: Scrapes Telegram channels for text and images
+- ✨ **Text Preprocessing**: Normalizes and tokenizes Amharic text
+- 🏷️ **Entity Labeling**: Converts raw text into CoNLL format for NER
+- 🤖 **Model Fine-Tuning**: Adapts multilingual LLMs (XLM-Roberta, mBERT) for Amharic NER
+- 📊 **Vendor Analytics**: Generates scorecard to evaluate vendor performance
+
+## Repository Structure
+```
+├── data/
+│ ├── photos/ # Raw datasets (original data files)
+│ ├── telegram_data_conll.txt # Labeled dataset
+│ ├── telegram_data_processed.csv # Processed datasets
+│ └── telegram_data.csv # Raw datasets
+├── scripts/
+│ ├── __init__.py 
+│ └── data_preprocessig.ipynb # Notebook for preprocess and labeling
+├── scripts/
+│ ├── __init__.py 
+│ ├── .env # environment variables
+│ ├── data_ingestion.py # Script for extraction 
+│ └── data_preprocess.py # Script for preprocess and labeling
+├── tests/
+│ ├── __init__.py 
+│ └── test_data_preprocess.py # Test for preprocess and labeling
+├── .gitignore # Specifies files to ignore in Git
+├── README.md # This file
+└── requirements.txt # Python dependencies
+```
+
 ## Setup
 1. Clone: `git clone https://github.com/Martha3001/amharic-e-commerce-data-extractor-week4.git`
 2. Create venv: `python -m venv .venv`
