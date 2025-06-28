@@ -37,8 +37,10 @@ class DataPreprocess:
                 "\U000024C2-\U0001F251"
                 "]+", flags=re.UNICODE)
             normalize_text = emoji_pattern.sub(r'', normalize_text)
-            punctuation_pattern = re.compile(r"[._!?;:,\-\"'(){}\[\]]")
+            punctuation_pattern = re.compile(r"[._!?;:\-\"'(){}\[\]]")
             normalize_text = punctuation_pattern.sub(r' ', normalize_text)
+            comma_pattern = re.compile(r",")
+            normalize_text = comma_pattern.sub(r'', normalize_text)
             return normalize_text.strip()
 
     @staticmethod

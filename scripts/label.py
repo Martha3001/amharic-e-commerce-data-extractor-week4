@@ -1,32 +1,30 @@
 import re
 
-products = ['Hair', 'Scalp', 'Massager', 'Baby', 'Carrier', 'Core', 
-            'Electric', 'computer', 'Stainless', 'humidifier', 'helmet',
-             'Silicone', 'battery', 'knee', 'Kitchen', 'ኮምፒውተር', 'socks',
-             'i5', 'hd', 'Ram', 'Intel', 'pavilion', 'water', 'Food', 
-             'Capacity', 'Power', '8gb', 'Color', 'Tape', 'Steel', 'trouser',
-             'storage', 'SSD', 'screen', 'Graphics', 'Battery', 'Water',
-             '1tb', 'Double', 'Material', 'Hp', 'Portable', 'hat', 'hanger',
-              'Brush', 'design', 'touch', 'Machine', 'inch', 'Screen', 'የሱሪ',
-              'DDR4', 'LED', 'Foldable', 'head', 'USB', 'HD', 'RAM', 'ማስቀመጫ',
-              'Light', 'steel', 'clean', 'ssd', 'ram', 'power', '4gb', 'kit',
-              'GRAPHICS', 'i7', 'Model', 'brand', 'probook', 'Washing', 
-              'kitchen', 'Cleaning', 'hdd', 'material','ጫማ','ፈርኒቸር',
-              'ቦርሳ','shower', 'cap', 'dish', 'gloves','health','care',
-              'milk','powder', 'container', 'feeding', 'bottle','ጥላ','uv',
-              'mini','umbrella', 'pocket', 'rack', 'sponge','scrub','body',
-              'nail','lamp', 'holder', 'broom', 'potato','chipper','8th',]
-locations = ['Bole', 'መሰረት', 'ደፋር', 'ሞል', 'ቢሮ', 'አድራሻ', 'ድሬዳዋ', 'አሸዋ',
-              'ሚና', 'ተራ', 'አበባ', 'መገናኛ','ግራንድ', 'ዘፍመሽ', 'ሞል', 'ሁለተኛ',
-              'ጀሞ', 'ከለላ', 'ህንፃ', 'ግራውንድ', 'ቦታ', 'ፎቅ', 'ደራርቱ',
-              'አደባባይ', 'ዉስጥ', 'እንዳሉ', 'ከታች', 'የራሳችን', 'ሱቅ', 
-              'ሱቃችን', 'ያለው', 'ፊት', 'በግራ', 'ጎን', 'ለቡ', 'ጊዮርጊስ',
-              'ቤት', 'ሴንተር', 'መስታወትፋብሪካ', 'ሲቲ', 'ሆሊሲቲ', 'አዳማ',
-              'ጉርድሾላ', 'ቁ', 'ቁጥር', 'ፊትለፊት', 'ሊፍቱ', 'በኩል','ፒያሳ',
-              'ፍሎር', 'ስሪ', 'ኤም','እንዳሉ', 'አዲስ', 'አበባ', 'አዲስአበባ', 
-              'ቤተ', 'መዳህኒአለም', 'ክርስቲያን', 'ማራቶን', 'ማእከል','ዋናው', 
-              'below', 'መሬት', 'መግቢያ', 'ገበያ', 'ምድር']
-price_keywords = ['ዋጋ', 'ብር', 'በ', 'ብር', 'price', 'birr',]
+products = [
+    'Kitchen', 'Hair', 'Tape', 'Power', 'Food', 'Brush', 'Bottle', 'Bath', 'Electric', 'Silicone', 
+    'Force', 'Stainless', 'Waterproof', 'Nike', 'Adidas', 'Skechers', 'Reebok', 'Air', 'leather', 
+    'Jordan', 'Baby',  'Gel', 'ልብስ', 'ልብሶች', 'Shoes', 'Boots', 'Toothbrush', 'Bag', 'Bags', 'Socks', 
+    'Patch', 'Knee', 'Massage', 'Massager', 'Blender', 'Cup', 'Door', 'Table', 'Plate',
+    'Towel', 'Coffee', 'Laptop', 'Lamp', 'USB', 'Cap', 'Sticker', 'Foam', 'Water',
+    'Bottle', 'Steel', 'Smart', 'Notebook', 'LED', 'Airforce', 'Nike', 'NB',
+    'Puma', 'Yeezy', 'Vans', 'loafer', 'Leather', 'suede', 'terrex', 'Goretex', 'Frame',
+    'Battery', 'Mop', 'Machine', 'Maker', 'Rack', 'Hand', 'Box', 'Spray', 'Patch', 'Milk',
+    'Towel', 'Plate', 'Tool', 'Dry', 'Blender', 'Home', 'Spa', 'Toothbrush', 'Sticker',
+    'Patch', 'Kettle', 'Cup', 'Shoes', 'Massager', 'Roller', 'Fan', 'Filter', 'Spa', 'sun',
+    'ጁስ', 'ROLEX', 'ኬክ', 'Base', 'Spoon', 'Slicer', 'Grinder', 'pad', 'shoe', 'ጫማ', 'Display',
+    'Pan', 'Watches', 'ፍሪጆች', 'Metal', 'መአዛን', 'Feeder', 'Toilet', 'Rubber', 'pairs', 'glasses',
+    'mixer', 'blade', 'tempered', 'glass', 'bakeware', 'የመስታዎት', 'ፓትራዎች', 'refrigerators', 'የፍሪጅ',
+    'ማስቀመጫ', 'የልብስ', 'ማጠቢያ', 'ላውንደሪዎች', 'protector', 'vegetable', 'cutter', 'cloud', 'chelsea',
+    'ማሽን', 'ማፍያ', 'ቡና', 'car', 'ecco', 'zara', 'clips', 'hanger', 'cloth', 'ማስጫ', 'chekich',
+    'የልብስም', 'የጫማም', 'ማጠብያ', 'washing', 'ማጠብያ', 'የጫማም', 'የልብስም', 'balenciaga', 'disele'
+    ]
+locations = [
+    'አድራሻ', 'ሜክሲኮ', 'ቦሌ', 'አዲስ', 'አበባ', 'Tera', 'ተራ', 'ሞል', 'ግራንድ', 'አድራሻችን', 'አልሳም', 'ከለላ',
+    'መድሀኔአለም', 'ኮሜርስ', 'ጀርባ', 'G07', 'ግራውንድ', 'የሱቅ', 'ቦታ', 'Address',  'ጀሞ', 'መሰናዶ',
+    'ፕላዛ', 'አፓርታማ', 'ፊትለፊት', 'አለምነሽ', 'መዚድ', 'ኬኬር', 'ፍሎር', 'አይመን', 'ህንፃ', 'ከ', 
+    'ዘፍመሽ', 'መገናኛ', 'ታወር', 'ለይ', 'ድሪም', 'ሀይሎች', 'ጦር', 'fashion', 'ፋሽን'
+    ]
+price_keywords = ['ዋጋ', 'ብር', 'በ', 'ብር', 'price', 'birr', 'Prices']
 
 class Label:
     """
@@ -51,25 +49,19 @@ class Label:
                 i += 1
         return spans
 
-    # Find price spans: looks for price keywords and digits after them
-    @staticmethod
+    # @staticmethod
     def find_price_spans(tokens):
         spans = []
-        price_pattern = re.compile(r'\d+(br|birr|etb|ብር)?$', re.IGNORECASE)
-        i = 0
-        while i < len(tokens):
-            token = tokens[i]
-            if token in price_keywords or price_pattern.match(token):
-                start = i
-                j = i + 1
+        for i, token in enumerate(tokens):
+            if token in price_keywords:
                 # Collect following tokens that are numbers or currency
-                while j < len(tokens) and (tokens[j].isdigit() or tokens[j] in ["ብር", "br", "birr", "etb"]):
+                j = i + 1
+                while j < len(tokens) and (tokens[j].isdigit() or tokens[j] == "ብር" or tokens[j] == "birr"):
                     j += 1
-                spans.append((start, j))
-                i = j
-            else:
-                i += 1
+                if j > i + 1:
+                    spans.append((i, j))
         return spans
+
 
     # Main function to label a list of messages
     @staticmethod
