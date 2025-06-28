@@ -76,7 +76,15 @@ class DataPreprocess:
         """
         df['Cleaned_Message'] = df['Message'].fillna('').apply(lambda x: DataPreprocess.normalize_amharic(x) if x.strip() != '' else '')
         df['Tokens'] = df['Cleaned_Message'].apply(DataPreprocess.tokenize_amharic)
-        metadata_cols = ['Channel Title', 'Channel Username', 'ID', 'Date', 'Media Path']
+        metadata_cols = [
+            'Channel Title',
+            'Channel Username',
+            'ID',
+            'Sender',
+            'Message',
+            'Date',
+            'Views'
+        ]
         meta = df[metadata_cols]
         content = df[['Cleaned_Message', 'Tokens']]
         return meta, content, df

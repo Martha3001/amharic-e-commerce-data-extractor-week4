@@ -55,14 +55,20 @@ class Label:
     @staticmethod
     def find_price_spans(tokens):
         spans = []
-        for i, token in enumerate(tokens):
-            if token in price_keywords:
-                # Collect following tokens that are numbers or currency
+        price_pattern = re.compile(r'\d+(br|birr|etb|ብር)?$', re.IGNORECASE)
+        i = 0
+        while i < len(tokens):
+            token = tokens[i]
+            if token in price_keywords or price_pattern.match(token):
+                start = i
                 j = i + 1
-                while j < len(tokens) and (tokens[j].isdigit() or tokens[j] == "ብር"):
+                # Collect following tokens that are numbers or currency
+                while j < len(tokens) and (tokens[j].isdigit() or tokens[j] in ["ብር", "br", "birr", "etb"]):
                     j += 1
-                if j > i + 1:
-                    spans.append((i, j))
+                spans.append((start, j))
+                i = j
+            else:
+                i += 1
         return spans
 
     # Main function to label a list of messages
@@ -110,6 +116,7 @@ class Label:
     @staticmethod
     def label_dataframe(df):
         conll_lines = []
+
         sample_df = df.dropna(subset=["Cleaned_Message"])
         for _, row in sample_df.iterrows():
             tokens = row["Tokens"]
