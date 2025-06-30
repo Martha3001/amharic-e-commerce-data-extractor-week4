@@ -37,8 +37,10 @@ class DataPreprocess:
                 "\U000024C2-\U0001F251"
                 "]+", flags=re.UNICODE)
             normalize_text = emoji_pattern.sub(r'', normalize_text)
-            punctuation_pattern = re.compile(r"[._!?;:,\-\"'(){}\[\]]")
+            punctuation_pattern = re.compile(r"[._!?;:\-\"'(){}\[\]]")
             normalize_text = punctuation_pattern.sub(r' ', normalize_text)
+            comma_pattern = re.compile(r",")
+            normalize_text = comma_pattern.sub(r'', normalize_text)
             return normalize_text.strip()
 
     @staticmethod
@@ -76,7 +78,15 @@ class DataPreprocess:
         """
         df['Cleaned_Message'] = df['Message'].fillna('').apply(lambda x: DataPreprocess.normalize_amharic(x) if x.strip() != '' else '')
         df['Tokens'] = df['Cleaned_Message'].apply(DataPreprocess.tokenize_amharic)
-        metadata_cols = ['Channel Title', 'Channel Username', 'ID', 'Date', 'Media Path']
+        metadata_cols = [
+            'Channel Title',
+            'Channel Username',
+            'ID',
+            'Sender',
+            'Message',
+            'Date',
+            'Views'
+        ]
         meta = df[metadata_cols]
         content = df[['Cleaned_Message', 'Tokens']]
         return meta, content, df
